@@ -1,0 +1,2 @@
+defmodule EctoNetwork do
+end
