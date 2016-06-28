@@ -27,6 +27,8 @@ defmodule EctoNetwork.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [{:ecto, ">= 0.0.0"},
+     {:postgrex, ">= 0.0.0"},
+     {:phoenix_html, ">= 0.0.0", [optional: true]}]
   end
 end
