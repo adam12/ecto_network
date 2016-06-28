@@ -2,6 +2,9 @@
 
 Ecto types to support MACADDR and Network extensions provided by Postgrex.
 
+Although this is primarily an Ecto library, it has a hard dependency on Postgrex
+due to the types it is providing.
+
 ## Installation
 
 1. Add `ecto_network` to your list of dependencies in `mix.exs`:
@@ -11,11 +14,34 @@ Ecto types to support MACADDR and Network extensions provided by Postgrex.
       [{:ecto_network, "~> 0.1.0"}]
     end
     ```
-2. Setup Postgrex extensions for MACADDR and/or Network (INET, CIDR).
+2. Add Postgrex extensions for MACADDR and/or Network (INET, CIDR) to your Repo
+   config.
 
-    ```elixir
-    extensions: [
-      {Postgrex.Extensions.MACADDR, nil},
-      {Postgrex.Extensions.Network, nil}
-    ],
-    ```
+    For Phoenix, you will want to update your environment-specific config files
+    (`config/dev.exs`, `config/test.exs`, `config/prod.exs`) and add the
+    extensions to the your Repo config.
+
+	```elixir
+	# Configure your database
+	config :your_app, YourApp.Repo,
+	  adapter: Ecto.Adapters.Postgres,
+	  extensions: [
+	    {Postgrex.Extensions.MACADDR, nil},
+	    {Postgrex.Extensions.Network, nil}
+	  ],
+	  username: "",
+	  password: "",
+	  database: "yourapp_dev",
+	  hostname: "localhost",
+	  pool_size: 10
+	```
+
+3. Use the new types in your Ecto schemas.
+
+	```elixir
+	schema "your_table" do
+	  field :ip_address, EctoNetwork.INET
+	  field :mac_address, EctoNetwork.MACADDR
+	  field :network, EctoNetwork.CIDR
+	end
+	```
