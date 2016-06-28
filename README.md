@@ -1,24 +1,21 @@
 # EctoNetwork
 
-**TODO: Add description**
+Ecto types to support MACADDR and Network extensions provided by Postgrex.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
-
-  1. Add `ecto_network` to your list of dependencies in `mix.exs`:
+1. Add `ecto_network` to your list of dependencies in `mix.exs`:
 
     ```elixir
     def deps do
       [{:ecto_network, "~> 0.1.0"}]
     end
     ```
-
-  2. Ensure `ecto_network` is started before your application:
+2. Setup Postgrex extensions for MACADDR and/or Network (INET, CIDR).
 
     ```elixir
-    def application do
-      [applications: [:ecto_network]]
-    end
+    extensions: [
+      {Postgrex.Extensions.MACADDR, nil},
+      {Postgrex.Extensions.Network, nil}
+    ],
     ```
-
