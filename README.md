@@ -1,4 +1,5 @@
 # EctoNetwork
+[![Build Status](https://travis-ci.org/adam12/ecto_network.svg?branch=master)](https://travis-ci.org/adam12/ecto_network)
 
 Ecto types to support MACADDR and Network extensions provided by Postgrex.
 
