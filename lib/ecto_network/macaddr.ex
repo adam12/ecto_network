@@ -9,7 +9,11 @@ defmodule EctoNetwork.MACADDR do
   def load(%Postgrex.MACADDR{}=address), do: {:ok, address}
   def load(_), do: :error
 
-  def dump(address) when is_binary(address), do: {:ok, address}
+  def dump(address) when is_binary(address) do
+    [a, b, c, d, e, f] = address |> String.split(":") |> Enum.map(&String.to_integer(&1, 16))
+
+    {:ok, %Postgrex.MACADDR{address: {a, b, c, d, e, f}}}
+  end
   def dump(_), do: :error
 
   def decode(%Postgrex.MACADDR{address: {a, b, c, d, e, f}}) do
@@ -22,5 +26,9 @@ end
 if Code.ensure_loaded?(Phoenix.HTML) do
   defimpl Phoenix.HTML.Safe, for: Postgrex.MACADDR do
     def to_iodata(%Postgrex.MACADDR{}=address), do: EctoNetwork.MACADDR.decode(address)
+  end
+
+  defimpl String.Chars, for: Postgrex.MACADDR do
+    def to_string(%Postgrex.MACADDR{}=address), do: EctoNetwork.MACADDR.decode(address)
   end
 end
