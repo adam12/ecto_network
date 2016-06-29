@@ -9,7 +9,19 @@ defmodule EctoNetwork.CIDR do
   def load(%Postgrex.CIDR{}=address), do: {:ok, address}
   def load(_), do: :error
 
-  def dump(address) when is_binary(address), do: {:ok, address}
+  def dump(address) when is_binary(address) do
+    [address, netmask] = address |> String.split("/")
+
+    [a, b, c, d] =
+      address
+      |> String.split(".")
+      |> Enum.map(&String.to_integer/1)
+
+
+    netmask = netmask |> String.to_integer()
+
+    {:ok, %Postgrex.CIDR{address: {a, b, c, d}, netmask: netmask}}
+  end
   def dump(_), do: :error
 
   def decode(%Postgrex.CIDR{address: {a, b, c, d}, netmask: netmask}) do
