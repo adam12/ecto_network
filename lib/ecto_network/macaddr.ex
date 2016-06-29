@@ -10,7 +10,10 @@ defmodule EctoNetwork.MACADDR do
   def load(_), do: :error
 
   def dump(address) when is_binary(address) do
-    [a, b, c, d, e, f] = address |> String.split(":") |> Enum.map(&String.to_integer(&1, 16))
+    [a, b, c, d, e, f] =
+      address
+      |> String.split(":")
+      |> Enum.map(&String.to_integer(&1, 16))
 
     {:ok, %Postgrex.MACADDR{address: {a, b, c, d, e, f}}}
   end

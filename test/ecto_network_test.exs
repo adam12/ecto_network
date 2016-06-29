@@ -27,4 +27,11 @@ defmodule EctoNetworkTest do
 
     assert "#{device.macaddr}" == "2:1:0:A:0:FF"
   end
+
+  test "accepts ip address as binary and saves" do
+    device = TestRepo.insert!(%Device{ip_address: "127.0.0.1"})
+    device = TestRepo.get(Device, device.id)
+
+    assert "#{device.ip_address}" == "127.0.0.1"
+  end
 end

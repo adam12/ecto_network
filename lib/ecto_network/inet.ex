@@ -9,7 +9,15 @@ defmodule EctoNetwork.INET do
   def load(%Postgrex.INET{}=address), do: {:ok, address}
   def load(_), do: :error
 
-  def dump(address) when is_binary(address), do: {:ok, address}
+  def dump(address) when is_binary(address) do
+    [a, b, c, d] =
+      address
+      |> String.split(".")
+      |> Enum.map(&String.to_integer/1)
+
+    {:ok, %Postgrex.INET{address: {a, b, c, d}}}
+  end
+
   def dump(_), do: :error
 
   def decode(%Postgrex.INET{address: {a, b, c, d}}) do
