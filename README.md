@@ -36,7 +36,19 @@ due to the types it is providing.
 	  pool_size: 10
 	```
 
-3. Use the new types in your Ecto schemas.
+3. Create your migrations using the Postgres types as atoms.
+
+	```elixir
+        def change do
+          create table(:your_table) do
+	    add :ip_address, :inet
+	    add :mac_address, :macaddr
+	    add :network, :cidr
+          end
+        end
+        ```
+
+4. Use the new types in your Ecto schemas.
 
 	```elixir
 	schema "your_table" do
