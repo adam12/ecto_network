@@ -1,8 +1,44 @@
 defmodule EctoNetworkTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
   doctest EctoNetwork
 
-  test "the truth" do
-    assert 1 + 1 == 2
+  import Ecto.Changeset
+
+  defmodule Device do
+    use Ecto.Schema
+
+    schema "devices" do
+      field :macaddr, EctoNetwork.MACADDR
+      field :ip_address, EctoNetwork.INET
+      field :network, EctoNetwork.CIDR
+    end
+  end
+
+  alias Ecto.Integration.TestRepo
+
+  setup do
+    # Explicitly get a connection before each test
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(TestRepo)
+  end
+
+  test "accepts mac address as binary and saves" do
+    device = TestRepo.insert!(%Device{macaddr: "2:1:0:A:0:FF"})
+    device = TestRepo.get(Device, device.id)
+
+    assert "#{device.macaddr}" == "2:1:0:A:0:FF"
+  end
+
+  test "accepts ip address as binary and saves" do
+    device = TestRepo.insert!(%Device{ip_address: "127.0.0.1"})
+    device = TestRepo.get(Device, device.id)
+
+    assert "#{device.ip_address}" == "127.0.0.1"
+  end
+
+  test "accepts cidr address as binary and saves" do
+    device = TestRepo.insert!(%Device{network: "127.0.0.0/24"})
+    device = TestRepo.get(Device, device.id)
+
+    assert "#{device.network}" == "127.0.0.0/24"
   end
 end
