@@ -2,8 +2,6 @@ defmodule EctoNetworkTest do
   use ExUnit.Case, async: true
   doctest EctoNetwork
 
-  import Ecto.Changeset
-
   defmodule Device do
     use Ecto.Schema
 
