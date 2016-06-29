@@ -26,12 +26,12 @@ defmodule EctoNetwork.MACADDR do
   end
 end
 
+defimpl String.Chars, for: Postgrex.MACADDR do
+  def to_string(%Postgrex.MACADDR{}=address), do: EctoNetwork.MACADDR.decode(address)
+end
+
 if Code.ensure_loaded?(Phoenix.HTML) do
   defimpl Phoenix.HTML.Safe, for: Postgrex.MACADDR do
     def to_iodata(%Postgrex.MACADDR{}=address), do: EctoNetwork.MACADDR.decode(address)
-  end
-
-  defimpl String.Chars, for: Postgrex.MACADDR do
-    def to_string(%Postgrex.MACADDR{}=address), do: EctoNetwork.MACADDR.decode(address)
   end
 end
