@@ -57,4 +57,18 @@ defmodule EctoNetworkTest do
     assert "#{Enum.at(device.networks, 0)}" == "127.0.0.0/24"
     assert "#{Enum.at(device.networks, 1)}" == "127.0.1.0/24"
   end
+
+  test "allows updates to an array of cidr addresses as binary" do
+    device = TestRepo.insert!(%Device{networks: ["127.0.0.0/24"]})
+
+    # Reload the Device from the Repo, add another IP address, and update
+    device = TestRepo.get(Device, device.id)
+    networks = device.networks ++ ["192.168.0.1/32"]
+    Ecto.Changeset.change(device, networks: networks) |> TestRepo.update!
+
+
+    device = TestRepo.get(Device, device.id)
+    assert "#{Enum.at(device.networks, 0)}" == "127.0.0.0/24"
+    assert "#{Enum.at(device.networks, 1)}" == "192.168.0.1/32"
+  end
 end
