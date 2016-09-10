@@ -57,4 +57,12 @@ defmodule EctoNetworkTest do
     assert "#{Enum.at(device.networks, 0)}" == "127.0.0.0/24"
     assert "#{Enum.at(device.networks, 1)}" == "127.0.1.0/24"
   end
+
+  test "accepts array of cidr addresses as types and saves" do
+    device = TestRepo.insert!(%Device{networks: [%Postgrex.CIDR{address: {127, 0, 0, 0}, netmask: 24}, %Postgrex.CIDR{address: {127, 0, 1, 0}, netmask: 24}]})
+    device = TestRepo.get(Device, device.id)
+
+    assert "#{Enum.at(device.networks, 0)}" == "127.0.0.0/24"
+    assert "#{Enum.at(device.networks, 1)}" == "127.0.1.0/24"
+  end
 end

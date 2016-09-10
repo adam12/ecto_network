@@ -22,6 +22,11 @@ defmodule EctoNetwork.CIDR do
 
     {:ok, %Postgrex.CIDR{address: {a, b, c, d}, netmask: netmask}}
   end
+
+  def dump(%Postgrex.CIDR{}=address) do
+    {:ok, address}
+  end
+
   def dump(_), do: :error
 
   def decode(%Postgrex.CIDR{address: {a, b, c, d}, netmask: netmask}) do
