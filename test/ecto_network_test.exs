@@ -9,6 +9,7 @@ defmodule EctoNetworkTest do
       field :macaddr, EctoNetwork.MACADDR
       field :ip_address, EctoNetwork.INET
       field :network, EctoNetwork.CIDR
+      field :networks, {:array, EctoNetwork.CIDR}
     end
   end
 
@@ -47,5 +48,13 @@ defmodule EctoNetworkTest do
     device = TestRepo.get(Device, device.id)
 
     assert "#{device.network}" == "127.0.0.0/24"
+  end
+
+  test "accepts array of cidr addresses as binary and saves" do
+    device = TestRepo.insert!(%Device{networks: ["127.0.0.0/24", "127.0.1.0/24"]})
+    device = TestRepo.get(Device, device.id)
+
+    assert "#{Enum.at(device.networks, 0)}" == "127.0.0.0/24"
+    assert "#{Enum.at(device.networks, 1)}" == "127.0.1.0/24"
   end
 end
