@@ -4,12 +4,20 @@ defmodule EctoNetworkTest do
 
   defmodule Device do
     use Ecto.Schema
+    import Ecto.Changeset
 
     schema "devices" do
       field :macaddr, EctoNetwork.MACADDR
       field :ip_address, EctoNetwork.INET
       field :network, EctoNetwork.CIDR
       field :networks, {:array, EctoNetwork.CIDR}
+    end
+
+    @required ~w(macaddr ip_address network networks)
+
+    def changeset(struct, params \\ %{}) do
+      struct
+      |> cast(params, @required)
     end
   end
 
@@ -44,14 +52,16 @@ defmodule EctoNetworkTest do
   end
 
   test "accepts cidr address as binary and saves" do
-    device = TestRepo.insert!(%Device{network: "127.0.0.0/24"})
+    changeset = Device.changeset(%Device{}, %{network: "127.0.0.0/24"})
+    device = TestRepo.insert!(changeset)
     device = TestRepo.get(Device, device.id)
 
     assert "#{device.network}" == "127.0.0.0/24"
   end
 
   test "accepts array of cidr addresses as binary and saves" do
-    device = TestRepo.insert!(%Device{networks: ["127.0.0.0/24", "127.0.1.0/24"]})
+    changeset = Device.changeset(%Device{}, %{networks: ["127.0.0.0/24", "127.0.1.0/24"]})
+    device = TestRepo.insert!(changeset)
     device = TestRepo.get(Device, device.id)
 
     assert "#{Enum.at(device.networks, 0)}" == "127.0.0.0/24"
@@ -59,11 +69,12 @@ defmodule EctoNetworkTest do
   end
 
   test "accepts array of cidr addresses as mixed types and saves" do
-    device = TestRepo.insert!(%Device{networks: [
-        %Postgrex.CIDR{address: {127, 0, 0, 0}, netmask: 24},
-        "127.0.1.0/24"
-      ]})
+    changeset = Device.changeset(%Device{}, %{networks: [
+         %Postgrex.CIDR{address: {127, 0, 0, 0}, netmask: 24},
+         "127.0.1.0/24"
+    ]})
 
+    device = TestRepo.insert!(changeset)
     device = TestRepo.get(Device, device.id)
 
     assert "#{Enum.at(device.networks, 0)}" == "127.0.0.0/24"
