@@ -29,7 +29,8 @@ defmodule EctoNetworkTest do
   end
 
   test "accepts mac address as binary and saves" do
-    device = TestRepo.insert!(%Device{macaddr: "2:1:0:A:0:FF"})
+    changeset = Device.changeset(%Device{}, %{macaddr: "2:1:0:A:0:FF"})
+    device = TestRepo.insert!(changeset)
     device = TestRepo.get(Device, device.id)
 
     assert "#{device.macaddr}" == "2:1:0:A:0:FF"

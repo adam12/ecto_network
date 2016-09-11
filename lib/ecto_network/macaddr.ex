@@ -3,13 +3,8 @@ defmodule EctoNetwork.MACADDR do
 
   def type, do: :macaddr
 
-  def cast(address) when is_binary(address), do: {:ok, address}
-  def cast(_), do: :error
-
-  def load(%Postgrex.MACADDR{}=address), do: {:ok, address}
-  def load(_), do: :error
-
-  def dump(address) when is_binary(address) do
+  def cast(%Postgrex.MACADDR{}=address), do: {:ok, address}
+  def cast(address) when is_binary(address) do
     [a, b, c, d, e, f] =
       address
       |> String.split(":")
@@ -17,6 +12,11 @@ defmodule EctoNetwork.MACADDR do
 
     {:ok, %Postgrex.MACADDR{address: {a, b, c, d, e, f}}}
   end
+
+  def load(%Postgrex.MACADDR{}=address), do: {:ok, address}
+  def load(_), do: :error
+
+  def dump(%Postgrex.MACADDR{}=address), do: {:ok, address}
   def dump(_), do: :error
 
   def decode(%Postgrex.MACADDR{address: {a, b, c, d, e, f}}) do
