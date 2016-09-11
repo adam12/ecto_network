@@ -36,7 +36,8 @@ defmodule EctoNetworkTest do
   end
 
   test "accepts ipv4 address as binary and saves" do
-    device = TestRepo.insert!(%Device{ip_address: "127.0.0.1"})
+    changeset = Device.changeset(%Device{}, %{ip_address: "127.0.0.1"})
+    device = TestRepo.insert!(changeset)
     device = TestRepo.get(Device, device.id)
 
     assert "#{device.ip_address}" == "127.0.0.1"
@@ -45,7 +46,8 @@ defmodule EctoNetworkTest do
   test "accepts ipv6 address as binary and saves" do
     ip_address = "2001:0db8:0000:0000:0000:ff00:0042:8329"
     short_ip_address = "2001:DB8::FF00:42:8329"
-    device = TestRepo.insert!(%Device{ip_address: ip_address})
+    changeset = Device.changeset(%Device{}, %{ip_address: ip_address})
+    device = TestRepo.insert!(changeset)
     device = TestRepo.get(Device, device.id)
 
     assert "#{device.ip_address}" == short_ip_address
