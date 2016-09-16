@@ -3,19 +3,19 @@ defmodule EctoNetwork.INET do
 
   def type, do: :inet
 
-  def cast(address) when is_binary(address), do: {:ok, address}
-  def cast(_), do: :error
-
-  def load(%Postgrex.INET{}=address), do: {:ok, address}
-  def load(_), do: :error
-
-  def dump(address) when is_binary(address) do
+  def cast(%Postgrex.INET{}=address), do: {:ok, address}
+  def cast(address) when is_binary(address) do
     case parse_address(address) do
       {:ok, parsed_address} -> {:ok, %Postgrex.INET{address: parsed_address}}
       {:error, _einval}     -> :error
     end
   end
+  def cast(_), do: :error
 
+  def load(%Postgrex.INET{}=address), do: {:ok, address}
+  def load(_), do: :error
+
+  def dump(%Postgrex.INET{}=address), do: {:ok, address}
   def dump(_), do: :error
 
   def decode(%Postgrex.INET{address: address}) do

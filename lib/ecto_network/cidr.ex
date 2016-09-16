@@ -3,13 +3,8 @@ defmodule EctoNetwork.CIDR do
 
   def type, do: :cidr
 
-  def cast(address) when is_binary(address), do: {:ok, address}
-  def cast(_), do: :error
-
-  def load(%Postgrex.CIDR{}=address), do: {:ok, address}
-  def load(_), do: :error
-
-  def dump(address) when is_binary(address) do
+  def cast(%Postgrex.CIDR{}=address), do: {:ok, address}
+  def cast(address) when is_binary(address) do
     [address, netmask] = address |> String.split("/")
 
     [a, b, c, d] =
@@ -22,6 +17,13 @@ defmodule EctoNetwork.CIDR do
 
     {:ok, %Postgrex.CIDR{address: {a, b, c, d}, netmask: netmask}}
   end
+  def cast(_), do: :error
+
+  def load(%Postgrex.CIDR{}=address), do: {:ok, address}
+  def load(_), do: :error
+
+  def dump(%Postgrex.CIDR{}=address), do: {:ok, address}
+
   def dump(_), do: :error
 
   def decode(%Postgrex.CIDR{address: {a, b, c, d}, netmask: netmask}) do

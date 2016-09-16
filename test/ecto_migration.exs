@@ -6,6 +6,7 @@ defmodule Ecto.Integration.Migration do
       add :macaddr, :macaddr
       add :ip_address, :inet
       add :network, :cidr
+      add :networks, {:array, :cidr}
     end
   end
 end
