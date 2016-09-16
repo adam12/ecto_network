@@ -62,6 +62,14 @@ defmodule EctoNetworkTest do
     assert "#{device.network}" == "127.0.0.0/24"
   end
 
+  test "accepts ipv6 cidr as binary and saves" do
+    changeset = Device.changeset(%Device{}, %{network: "2001:DB8::/32"})
+    device = TestRepo.insert!(changeset)
+    device = TestRepo.get(Device, device.id)
+
+    assert "#{device.network}" == "2001:DB8::/32"
+  end
+
   test "accepts array of cidr addresses as binary and saves" do
     changeset = Device.changeset(%Device{}, %{networks: ["127.0.0.0/24", "127.0.1.0/24"]})
     device = TestRepo.insert!(changeset)
