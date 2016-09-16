@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Changed
 - Moved parsing and decoding to `cast` functions
+- Switch to :inet for parsing network portion of CIDR
 
 ## [v0.3.0] - 2016-09-04
 ### Added

@@ -7,15 +7,14 @@ defmodule EctoNetwork.CIDR do
   def cast(address) when is_binary(address) do
     [address, netmask] = address |> String.split("/")
 
-    [a, b, c, d] =
+    {:ok, parsed_address} =
       address
-      |> String.split(".")
-      |> Enum.map(&String.to_integer/1)
-
+      |> String.to_char_list()
+      |> :inet.parse_address
 
     netmask = netmask |> String.to_integer()
 
-    {:ok, %Postgrex.CIDR{address: {a, b, c, d}, netmask: netmask}}
+    {:ok, %Postgrex.CIDR{address: parsed_address, netmask: netmask}}
   end
   def cast(_), do: :error
 
@@ -23,15 +22,13 @@ defmodule EctoNetwork.CIDR do
   def load(_), do: :error
 
   def dump(%Postgrex.CIDR{}=address), do: {:ok, address}
-
   def dump(_), do: :error
 
-  def decode(%Postgrex.CIDR{address: {a, b, c, d}, netmask: netmask}) do
-    address =
-      [a, b, c, d]
-      |> Enum.join(".")
-
-    "#{address}/#{netmask}"
+  def decode(%Postgrex.CIDR{address: address, netmask: netmask}) do
+    case :inet.ntoa(address) do
+      {:error, _einval} -> :error
+      formatted_address -> List.to_string(formatted_address) <> "/#{netmask}"
+    end
   end
 end
 
