@@ -1,8 +1,8 @@
 # Changelog
 
 ## [Unreleased]
-Nothing yet
-
+### Changed
+- Moved parsing and decoding to `cast` functions
 
 ## [v0.3.0] - 2016-09-04
 ### Added
