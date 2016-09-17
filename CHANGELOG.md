@@ -1,7 +1,9 @@
 # Changelog
 
 ## [Unreleased]
-- Nothing yet
+### Changed
+- Imrpove ExDoc configuration for better HexDocs integration
+- Better module documentation
 
 
 ## [v0.4.0] - 2016-09-17
