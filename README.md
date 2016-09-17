@@ -59,3 +59,7 @@ due to the types it is providing.
       field :network, EctoNetwork.CIDR
     end
     ```
+
+## License
+
+EctoNetwork is released under the MIT License. See LICENSE.md for more information.
