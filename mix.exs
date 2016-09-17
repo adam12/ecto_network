@@ -1,15 +1,22 @@
 defmodule EctoNetwork.Mixfile do
   use Mix.Project
 
+  @version "0.4.0"
+
   def project do
     [app: :ecto_network,
-     version: "0.4.0",
+     version: @version,
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps(),
      description: description(),
-     package: package()]
+     package: package(),
+     name: "EctoNetwork",
+     docs: [extras: ["README.md", "CHANGELOG.md"], main: "readme",
+            source_ref: "v#{@version}",
+            source_url: "https://github.com/adam12/ecto_network",
+           ]]
   end
 
   def application do
