@@ -5,7 +5,9 @@
 - Moved parsing and decoding to `cast` functions. If you were using inserts
   directly without casting (ie. inside a changeset), functionality may be broken.
 
-- Switch to :inet for parsing network portion of CIDR
+- Switch to :inet for parsing network portion of CIDR. IPv6 should be supported for
+  both types now.
+
 
 ## [v0.3.0] - 2016-09-04
 ### Added
