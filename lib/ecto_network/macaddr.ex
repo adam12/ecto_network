@@ -30,6 +30,7 @@ defmodule EctoNetwork.MACADDR do
   def decode(%Postgrex.MACADDR{address: {a, b, c, d, e, f}}) do
     [a, b, c, d, e, f]
     |> Enum.map(&Integer.to_string(&1, 16))
+    |> Enum.map(&String.pad_leading(&1, 2, "0"))
     |> Enum.join(":")
   end
 end
