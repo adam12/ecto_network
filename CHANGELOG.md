@@ -1,9 +1,12 @@
 # Changelog
 
 ## [Unreleased]
+
+## [v0.5.0] - 2017-02-01
 ### Changed
-- Imrpove ExDoc configuration for better HexDocs integration
+- Improve ExDoc configuration for better HexDocs integration
 - Better module documentation
+- Pad MAC addresses with zeros ([darkbushido](https://github.com/darkbushido))
 
 
 ## [v0.4.0] - 2016-09-17
@@ -24,7 +27,8 @@
 ### Added
 - Initial functionality implemented
 
-[Unreleased]: https://github.com/adam12/ecto_network/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/adam12/ecto_network/compare/v0.5.0...HEAD
+[v0.5.0]: https://github.com/adam12/ecto_network/compare/v0.4.0...v0.5.0
 [v0.4.0]: https://github.com/adam12/ecto_network/compare/v0.3.0...v0.4.0
 [v0.3.0]: https://github.com/adam12/ecto_network/compare/v0.2.0...v0.3.0
 [v0.2.0]: https://github.com/adam12/ecto_network/tree/v0.2.0
