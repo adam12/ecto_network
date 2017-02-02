@@ -60,6 +60,16 @@ due to the types it is providing.
     end
     ```
 
+## Contributing
+
+I love pull requests! If you fork this project and modify it, please ping me to see
+if your changes can be incorporated back into this project.
+
+That said, if your feature idea is nontrivial, you should probably open an issue to
+[discuss it](http://www.igvita.com/2011/12/19/dont-push-your-pull-requests/)
+before attempting a pull request.
+
 ## License
 
-EctoNetwork is released under the MIT License. See LICENSE.md for more information.
+EctoNetwork is released under the MIT License. See [LICENSE](LICENSE.md) for
+more information.
