@@ -16,29 +16,7 @@ due to the types it is providing.
     end
     ```
 
-2. Add Postgrex extensions for MACADDR and/or Network (INET, CIDR) to your Repo
-   config.
-
-    For Phoenix, you will want to update your environment-specific config files
-    (`config/dev.exs`, `config/test.exs`, `config/prod.exs`) and add the
-    extensions to the your Repo config.
-
-    ```elixir
-    # Configure your database
-    config :your_app, YourApp.Repo,
-      adapter: Ecto.Adapters.Postgres,
-      extensions: [
-        {Postgrex.Extensions.MACADDR, nil},
-        {Postgrex.Extensions.Network, nil}
-      ],
-      username: "",
-      password: "",
-      database: "yourapp_dev",
-      hostname: "localhost",
-      pool_size: 10
-    ```
-
-3. Create your migrations using the Postgres types as atoms.
+2. Create your migrations using the Postgres types as atoms.
 
     ```elixir
     def change do
@@ -50,7 +28,7 @@ due to the types it is providing.
     end
     ```
 
-4. Use the new types in your Ecto schemas.
+3. Use the new types in your Ecto schemas.
 
     ```elixir
     schema "your_table" do
