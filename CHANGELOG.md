@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### Changed
+- Add support for casting tuples ([bcardarella](https://github.com/bcardarella))
+
 
 ## [v0.5.0] - 2017-02-01
 ### Changed
