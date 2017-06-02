@@ -8,14 +8,15 @@ defmodule EctoNetwork.INET do
   def type, do: :inet
 
   @doc "Handle casting to Postgrex.INET"
-  def cast(%Postgrex.INET{}=address), do: {:ok, address}
-  def cast(address) when is_binary(address) do
-    case parse_address(address) do
-      {:ok, parsed_address} -> {:ok, %Postgrex.INET{address: parsed_address}}
-      {:error, _einval}     -> :error
+  def cast(address) do
+    address
+    |> case do
+      %Postgrex.INET{}=address -> {:ok, address}
+      address when is_tuple(address) -> cast(%Postgrex.INET{address: address})
+      address when is_binary(address) -> parse_address(address) |> cast()
+      _ -> :error
     end
   end
-  def cast(_), do: :error
 
   @doc "Load from the native Ecto representation"
   def load(%Postgrex.INET{}=address), do: {:ok, address}
@@ -34,7 +35,13 @@ defmodule EctoNetwork.INET do
   end
 
   defp parse_address(address) do
-    address |> String.to_char_list |> :inet.parse_address
+    address
+    |> String.to_char_list()
+    |> :inet.parse_address()
+    |> case do
+      {:ok, address} -> address
+      error -> error
+    end
   end
 end
 
