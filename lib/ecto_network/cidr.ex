@@ -14,7 +14,7 @@ defmodule EctoNetwork.CIDR do
 
     {:ok, parsed_address} =
       address
-      |> String.to_char_list()
+      |> String.to_charlist()
       |> :inet.parse_address
 
     netmask = netmask |> String.to_integer()
