@@ -36,7 +36,7 @@ defmodule EctoNetwork.INET do
 
   defp parse_address(address) do
     address
-    |> String.to_char_list()
+    |> String.to_charlist()
     |> :inet.parse_address()
     |> case do
       {:ok, address} -> address
