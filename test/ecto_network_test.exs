@@ -33,7 +33,7 @@ defmodule EctoNetworkTest do
     device = TestRepo.insert!(changeset)
     device = TestRepo.get(Device, device.id)
 
-    assert "#{device.macaddr}" == "02:01:00:0A:00:FF"
+    assert String.downcase("#{device.macaddr}") == String.downcase("02:01:00:0A:00:FF")
   end
 
   test "accepts ipv4 address as binary and saves" do
@@ -51,7 +51,7 @@ defmodule EctoNetworkTest do
     device = TestRepo.insert!(changeset)
     device = TestRepo.get(Device, device.id)
 
-    assert "#{device.ip_address}" == short_ip_address
+    assert String.downcase("#{device.ip_address}") == String.downcase(short_ip_address)
   end
 
   test "accepts ipv4 address as tuple and saves" do
@@ -69,7 +69,7 @@ defmodule EctoNetworkTest do
     device = TestRepo.insert!(changeset)
     device = TestRepo.get(Device, device.id)
 
-    assert "#{device.ip_address}" == short_ip_address
+    assert String.downcase("#{device.ip_address}") == String.downcase(short_ip_address)
   end
 
   test "accepts cidr address as binary and saves" do
@@ -85,7 +85,7 @@ defmodule EctoNetworkTest do
     device = TestRepo.insert!(changeset)
     device = TestRepo.get(Device, device.id)
 
-    assert "#{device.network}" == "2001:db8::/32"
+    assert String.downcase("#{device.network}") == String.downcase("2001:db8::/32")
   end
 
   test "accepts array of cidr addresses as binary and saves" do
