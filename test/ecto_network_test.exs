@@ -46,7 +46,7 @@ defmodule EctoNetworkTest do
 
   test "accepts ipv6 address as binary and saves" do
     ip_address = "2001:0db8:0000:0000:0000:ff00:0042:8329"
-    short_ip_address = "2001:DB8::FF00:42:8329"
+    short_ip_address = "2001:db8::ff00:42:8329"
     changeset = Device.changeset(%Device{}, %{ip_address: ip_address})
     device = TestRepo.insert!(changeset)
     device = TestRepo.get(Device, device.id)
@@ -64,7 +64,7 @@ defmodule EctoNetworkTest do
 
   test "accepts ipv6 address as tuple and saves" do
     ip_address = {8193, 3512, 0, 0, 0, 65280, 66, 33577}
-    short_ip_address = "2001:DB8::FF00:42:8329"
+    short_ip_address = "2001:db8::ff00:42:8329"
     changeset = Device.changeset(%Device{}, %{ip_address: ip_address})
     device = TestRepo.insert!(changeset)
     device = TestRepo.get(Device, device.id)
@@ -85,7 +85,7 @@ defmodule EctoNetworkTest do
     device = TestRepo.insert!(changeset)
     device = TestRepo.get(Device, device.id)
 
-    assert "#{device.network}" == "2001:DB8::/32"
+    assert "#{device.network}" == "2001:db8::/32"
   end
 
   test "accepts array of cidr addresses as binary and saves" do
