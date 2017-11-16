@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+
+## [v0.7.0] - 2017-11-16
+- Update mix dependencies
+- Fix tests from capitalization changes
+- Fix compiler warnings ([van-mronov](https://github.com/van-mronov))
+
 ## [v0.6.0] - 2017-06-16
 ### Changed
 - Add support for casting tuples ([bcardarella](https://github.com/bcardarella))
@@ -32,7 +38,8 @@
 ### Added
 - Initial functionality implemented
 
-[Unreleased]: https://github.com/adam12/ecto_network/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/adam12/ecto_network/compare/v0.7.0...HEAD
+[v0.7.0]: https://github.com/adam12/ecto_network/compare/v0.6.0...v0.7.0
 [v0.6.0]: https://github.com/adam12/ecto_network/compare/v0.5.0...v0.6.0
 [v0.5.0]: https://github.com/adam12/ecto_network/compare/v0.4.0...v0.5.0
 [v0.4.0]: https://github.com/adam12/ecto_network/compare/v0.3.0...v0.4.0
