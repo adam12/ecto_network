@@ -40,7 +40,7 @@ defmodule EctoNetwork.INET do
     |> :inet.parse_address()
     |> case do
       {:ok, address} -> address
-      error -> error
+      {:error, error} -> error
     end
   end
 end
