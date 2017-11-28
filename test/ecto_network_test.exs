@@ -44,6 +44,17 @@ defmodule EctoNetworkTest do
     assert "#{device.ip_address}" == "127.0.0.1"
   end
 
+  test "returns :error when ipv4 is invalid" do
+    result = EctoNetwork.INET.cast("abcd")
+    assert result == :error
+  end
+
+  test "converts ipv4 error into changeset error" do
+    changeset = Device.changeset(%Device{}, %{ip_address: "abcd"})
+    {:error, changeset} = TestRepo.insert(changeset)
+    assert changeset.errors[:ip_address] == {"is invalid", [type: EctoNetwork.INET, validation: :cast]}
+  end
+
   test "accepts ipv6 address as binary and saves" do
     ip_address = "2001:0db8:0000:0000:0000:ff00:0042:8329"
     short_ip_address = "2001:db8::ff00:42:8329"
