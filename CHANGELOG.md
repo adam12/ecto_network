@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+- Update to work with Ecto 3.0 (master) and Postgrex 0.14 (master).
 
 ## [v0.7.0] - 2017-11-16
 - Update mix dependencies
