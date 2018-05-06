@@ -43,21 +43,32 @@ defmodule EctoNetwork.INET do
   def cast(_), do: :error
 
   @doc "Load from the native Ecto representation"
-  def load(%Postgrex.INET{} = address), do: {:ok, address}
+  def load(%Postgrex.INET{} = inet) do
+    inet =
+      if address_netmask(inet.address, inet.netmask) do
+        inet
+      else
+        %{inet | netmask: nil}
+      end
+    {:ok, inet}
+  end
   def load(_), do: :error
 
   @doc "Convert to the native Ecto representation"
-  def dump(%Postgrex.INET{} = address), do: {:ok, address}
+  def dump(%Postgrex.INET{} = inet) do
+    inet =
+      if inet.netmask do
+        inet
+      else
+        %{inet | netmask: address_netmask(inet.address)}
+      end
+    {:ok, inet}
+  end
   def dump(_), do: :error
 
   @doc "Convert from native Ecto representation to a binary"
   def decode(%Postgrex.INET{address: address, netmask: netmask}) do
-    netmask =
-      cond do
-        tuple_size(address) == 4 && netmask == 32 -> nil
-        tuple_size(address) == 8 && netmask == 128 -> nil
-        true -> netmask
-      end
+    netmask = address_netmask(address, netmask)
 
     address
     |> :inet.ntoa()
@@ -73,6 +84,14 @@ defmodule EctoNetwork.INET do
 
   defp address_netmask(address) do
     if(tuple_size(address) == 4, do: 32, else: 128)
+  end
+
+  defp address_netmask(address, netmask) do
+    cond do
+      tuple_size(address) == 4 && netmask == 32 -> nil
+      tuple_size(address) == 8 && netmask == 128 -> nil
+      true -> netmask
+    end
   end
 end
 
