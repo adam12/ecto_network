@@ -7,7 +7,7 @@ defmodule EctoNetwork.Mixfile do
     [
       app: :ecto_network,
       version: @version,
-      elixir: "~> 1.5",
+      elixir: "~> 1.4",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       deps: deps(),
