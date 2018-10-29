@@ -32,7 +32,7 @@ defmodule EctoNetwork.Mixfile do
       {:ecto_sql, "3.0.0-rc.0"},
       {:postgrex, "0.14.0-rc.1"},
       {:phoenix_html, ">= 0.0.0", [optional: true]},
-      {:ex_doc, ">= 0.0.0", only: :dev}
+      {:ex_doc, "~> 0.19", only: :dev}
     ]
   end
 
