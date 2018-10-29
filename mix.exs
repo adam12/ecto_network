@@ -28,12 +28,9 @@ defmodule EctoNetwork.Mixfile do
   end
 
   defp deps do
-    # On release, this will need to be set to
-    # {:postgrex, ">= 0.14.0"}
     [
-      {:db_connection, github: "elixir-ecto/db_connection", override: true},
-      {:ecto, github: "elixir-ecto/ecto"},
-      {:postgrex, github: "elixir-ecto/postgrex"},
+      {:ecto_sql, "3.0.0-rc.0"},
+      {:postgrex, "0.14.0-rc.1"},
       {:phoenix_html, ">= 0.0.0", [optional: true]},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
