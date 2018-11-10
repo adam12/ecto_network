@@ -7,13 +7,13 @@ defmodule EctoNetworkTest do
     import Ecto.Changeset
 
     schema "devices" do
-      field :macaddr, EctoNetwork.MACADDR
-      field :ip_address, EctoNetwork.INET
-      field :network, EctoNetwork.CIDR
-      field :networks, {:array, EctoNetwork.CIDR}
+      field(:macaddr, EctoNetwork.MACADDR)
+      field(:ip_address, EctoNetwork.INET)
+      field(:network, EctoNetwork.CIDR)
+      field(:networks, {:array, EctoNetwork.CIDR})
     end
 
-    @required ~w(macaddr ip_address network networks)
+    @required ~w(macaddr ip_address network networks)a
 
     def changeset(struct, params \\ %{}) do
       struct
@@ -52,7 +52,9 @@ defmodule EctoNetworkTest do
   test "converts ipv4 error into changeset error" do
     changeset = Device.changeset(%Device{}, %{ip_address: "abcd"})
     {:error, changeset} = TestRepo.insert(changeset)
-    assert changeset.errors[:ip_address] == {"is invalid", [type: EctoNetwork.INET, validation: :cast]}
+
+    assert changeset.errors[:ip_address] ==
+             {"is invalid", [type: EctoNetwork.INET, validation: :cast]}
   end
 
   test "accepts ipv6 address as binary and saves" do
@@ -66,7 +68,7 @@ defmodule EctoNetworkTest do
   end
 
   test "accepts ipv4 address as tuple and saves" do
-    changeset = Device.changeset(%Device{}, %{ip_address: {127,0,0,1}})
+    changeset = Device.changeset(%Device{}, %{ip_address: {127, 0, 0, 1}})
     device = TestRepo.insert!(changeset)
     device = TestRepo.get(Device, device.id)
 
@@ -109,10 +111,13 @@ defmodule EctoNetworkTest do
   end
 
   test "accepts array of cidr addresses as mixed types and saves" do
-    changeset = Device.changeset(%Device{}, %{networks: [
-         %Postgrex.CIDR{address: {127, 0, 0, 0}, netmask: 24},
-         "127.0.1.0/24"
-    ]})
+    changeset =
+      Device.changeset(%Device{}, %{
+        networks: [
+          %Postgrex.INET{address: {127, 0, 0, 0}, netmask: 24},
+          "127.0.1.0/24"
+        ]
+      })
 
     device = TestRepo.insert!(changeset)
     device = TestRepo.get(Device, device.id)
