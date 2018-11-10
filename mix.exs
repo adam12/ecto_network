@@ -1,13 +1,13 @@
 defmodule EctoNetwork.Mixfile do
   use Mix.Project
 
-  @version "0.7.0"
+  @version "1.0.0"
 
   def project do
     [
       app: :ecto_network,
       version: @version,
-      elixir: "~> 1.3",
+      elixir: "~> 1.4",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -28,14 +28,11 @@ defmodule EctoNetwork.Mixfile do
   end
 
   defp deps do
-    # On release, this will need to be set to
-    # {:postgrex, ">= 0.14.0"}
     [
-      {:db_connection, github: "elixir-ecto/db_connection", override: true},
-      {:ecto, github: "elixir-ecto/ecto"},
-      {:postgrex, github: "elixir-ecto/postgrex"},
+      {:ecto_sql, ">= 3.0.0"},
+      {:postgrex, ">= 0.14.0"},
       {:phoenix_html, ">= 0.0.0", [optional: true]},
-      {:ex_doc, ">= 0.0.0", only: :dev}
+      {:ex_doc, "~> 0.19", only: :dev}
     ]
   end
 

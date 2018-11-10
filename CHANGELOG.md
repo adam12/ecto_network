@@ -1,8 +1,11 @@
 # Changelog
 
-## [Unreleased]
+## [v1.0.0]
+- Update dependencies to Ecto >= 3.0 and Postgrex >= 0.14
 
-- Update to work with Ecto 3.0 (master) and Postgrex 0.14 (master).
+## [v1.0.0-rc.0]
+- Update to work with Ecto 3.0-rc.0 and Postgrex 0.14-rc.1.
+- Use `extra_applications` when defining application list.
 
 ## [v0.7.0] - 2017-11-16
 - Update mix dependencies
