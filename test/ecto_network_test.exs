@@ -6,6 +6,7 @@ defmodule EctoNetworkTest do
     use Ecto.Schema
     import Ecto.Changeset
 
+
     schema "devices" do
       field(:macaddr, EctoNetwork.MACADDR)
       field(:ip_address, EctoNetwork.INET)
@@ -124,5 +125,18 @@ defmodule EctoNetworkTest do
 
     assert "#{Enum.at(device.networks, 0)}" == "127.0.0.0/24"
     assert "#{Enum.at(device.networks, 1)}" == "127.0.1.0/24"
+  end
+
+  test "netmask of /32 by default" do
+    ip1 =
+      Device.changeset(%Device{}, %{ip_address: {8, 8, 8, 8}})
+      |> TestRepo.insert!()
+      |> Map.get(:ip_address)
+
+    ip2 =
+      TestRepo.get_by(Device, %{ip_address: {8, 8, 8, 8}})
+      |> Map.get(:ip_address)
+
+    assert ip1 == ip2
   end
 end

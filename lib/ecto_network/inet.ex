@@ -44,12 +44,12 @@ defmodule EctoNetwork.INET do
 
   @doc "Load from the native Ecto representation"
   def load(%Postgrex.INET{} = inet) do
-    inet =
-      if address_netmask(inet.address, inet.netmask) do
-        inet
-      else
-        %{inet | netmask: nil}
-      end
+    inet = cond do
+      address_netmask(inet.address, inet.netmask) -> inet
+      address_netmask(inet.address) -> %{inet | netmask: address_netmask(inet.address)}
+      true -> %{inet | netmask: nil}
+    end
+
     {:ok, inet}
   end
   def load(_), do: :error
