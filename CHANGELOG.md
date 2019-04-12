@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+- Ensure inet records returned from database have a default netmask instead of nil (#13)
+
 ## [v1.0.0]
 - Update dependencies to Ecto >= 3.0 and Postgrex >= 0.14
 
