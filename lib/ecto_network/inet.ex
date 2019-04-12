@@ -44,14 +44,16 @@ defmodule EctoNetwork.INET do
 
   @doc "Load from the native Ecto representation"
   def load(%Postgrex.INET{} = inet) do
-    inet = cond do
-      address_netmask(inet.address, inet.netmask) -> inet
-      address_netmask(inet.address) -> %{inet | netmask: address_netmask(inet.address)}
-      true -> %{inet | netmask: nil}
-    end
+    inet =
+      cond do
+        address_netmask(inet.address, inet.netmask) -> inet
+        address_netmask(inet.address) -> %{inet | netmask: address_netmask(inet.address)}
+        true -> %{inet | netmask: nil}
+      end
 
     {:ok, inet}
   end
+
   def load(_), do: :error
 
   @doc "Convert to the native Ecto representation"
@@ -62,8 +64,10 @@ defmodule EctoNetwork.INET do
       else
         %{inet | netmask: address_netmask(inet.address)}
       end
+
     {:ok, inet}
   end
+
   def dump(_), do: :error
 
   @doc "Convert from native Ecto representation to a binary"

@@ -6,7 +6,6 @@ defmodule EctoNetworkTest do
     use Ecto.Schema
     import Ecto.Changeset
 
-
     schema "devices" do
       field(:macaddr, EctoNetwork.MACADDR)
       field(:ip_address, EctoNetwork.INET)
