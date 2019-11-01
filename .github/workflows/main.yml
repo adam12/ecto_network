@@ -1,0 +1,41 @@
+name: CI
+
+on: [push]
+
+jobs:
+  ecto31:
+    runs-on: ubuntu-latest
+    container:
+      image: elixir:1.9.1-slim
+    services:
+      postgres:
+        image: postgres:10.8
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: ecto_network_test
+        ports:
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install dependencies
+        run: |
+          mix local.rebar --force
+          mix local.hex --force
+          LOCKFILE=mix.lock.ecto31 mix deps.get
+      - name: Run all tests
+        run: LOCKFILE=mix.lock.ecto31 mix test
+
+  # ecto32:
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: elixir:1.9.1-slim
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - name: Install dependencies
+  #       run: |
+  #         mix local.rebar --force
+  #         mix local.hex --force
+  #         LOCKFILE=mix.lock mix deps.get
+  #     - name: Run all tests
+  #       run: mix test
