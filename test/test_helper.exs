@@ -6,7 +6,7 @@ Application.put_env(
   :ecto,
   TestRepo,
   adapter: Ecto.Adapters.Postgres,
-  url: "ecto://localhost/ecto_network_test",
+  url: System.get_env("DATABASE_URL", "ecto://localhost/ecto_network_test"),
   pool: Ecto.Adapters.SQL.Sandbox
 )
 
