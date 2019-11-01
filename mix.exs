@@ -52,6 +52,10 @@ defmodule EctoNetwork.Mixfile do
   end
 
   defp lockfile do
-    System.get_env("LOCKFILE", "mix.lock")
+    if function_exported?(System, :get_env, 2) do
+      System.get_env("LOCKFILE", "mix.lock")
+    else
+      System.get_env("LOCKFILE") || "mix.lock"
+    end
   end
 end
