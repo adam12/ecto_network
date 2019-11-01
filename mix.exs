@@ -19,7 +19,8 @@ defmodule EctoNetwork.Mixfile do
         main: "readme",
         source_ref: "v#{@version}",
         source_url: "https://github.com/adam12/ecto_network"
-      ]
+      ],
+      lockfile: lockfile()
     ]
   end
 
@@ -48,5 +49,9 @@ defmodule EctoNetwork.Mixfile do
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/adam12/ecto_network"}
     ]
+  end
+
+  defp lockfile do
+    System.get_env("LOCKFILE", "mix.lock")
   end
 end
