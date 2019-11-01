@@ -1,5 +1,10 @@
 # Changelog
 
+## [Unreleased]
+
+- Ecto 3.2 support ([halostatue](https://github.com/halostatue))
+- Test database configurable through `DATABASE_URL` environment variable
+
 ## [v1.1.0]
 
 - POSSIBLY BREAKING CHANGE: Ensure inet records returned from database have a default
