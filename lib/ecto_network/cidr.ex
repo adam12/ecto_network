@@ -7,6 +7,12 @@ defmodule EctoNetwork.CIDR do
 
   def type, do: :cidr
 
+  @doc "Handle embedding format for CIDR records."
+  defdelegate embed_as(format), to: EctoNetwork.INET
+
+  @doc "Handle equality testing for CIDR records."
+  defdelegate equal?(left, right), to: EctoNetwork.INET
+
   @doc "Handle casting to Postgrex.INET"
   defdelegate cast(address), to: EctoNetwork.INET
 

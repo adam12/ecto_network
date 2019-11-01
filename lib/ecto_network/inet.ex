@@ -7,6 +7,12 @@ defmodule EctoNetwork.INET do
 
   def type, do: :inet
 
+  @doc "Handle embedding format for CIDR records."
+  def embed_as(_), do: :self
+
+  @doc "Handle equality testing for CIDR records."
+  def equal?(left, right), do: left == right
+
   @doc "Handle casting to Postgrex.INET"
   def cast(%Postgrex.INET{} = address), do: {:ok, address}
 

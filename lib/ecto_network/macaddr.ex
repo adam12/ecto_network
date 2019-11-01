@@ -7,6 +7,12 @@ defmodule EctoNetwork.MACADDR do
 
   def type, do: :macaddr
 
+  @doc "Handle embedding format for CIDR records."
+  def embed_as(_), do: :self
+
+  @doc "Handle equality testing for CIDR records."
+  def equal?(left, right), do: left == right
+
   @doc "Handle casting to Postgrex.MACADDR"
   def cast(%Postgrex.MACADDR{} = address), do: {:ok, address}
 
