@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v1.2.0
 
 - Ecto 3.2 support ([halostatue](https://github.com/halostatue))
 - Test database configurable through `DATABASE_URL` environment variable
