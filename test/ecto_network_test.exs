@@ -36,6 +36,14 @@ defmodule EctoNetworkTest do
     assert String.downcase("#{device.macaddr}") == String.downcase("02:01:00:0A:00:FF")
   end
 
+  test "returns changeset error when mac address is invalid" do
+    changeset = Device.changeset(%Device{}, %{macaddr: "notamac"})
+    assert {:error, invalid_changeset} = TestRepo.insert(changeset)
+
+    assert changeset.errors[:macaddr] ==
+             {"is invalid", [type: EctoNetwork.MACADDR, validation: :cast]}
+  end
+
   test "accepts ipv4 address as binary and saves" do
     changeset = Device.changeset(%Device{}, %{ip_address: "127.0.0.1"})
     device = TestRepo.insert!(changeset)
