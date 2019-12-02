@@ -17,12 +17,9 @@ defmodule EctoNetwork.MACADDR do
   def cast(%Postgrex.MACADDR{} = address), do: {:ok, address}
 
   def cast(address) when is_binary(address) do
-    [a, b, c, d, e, f] =
-      address
-      |> String.split(":")
-      |> Enum.map(&String.to_integer(&1, 16))
-
-    {:ok, %Postgrex.MACADDR{address: {a, b, c, d, e, f}}}
+    with [a, b, c, d, e, f] <- parse_address(address) do
+      {:ok, %Postgrex.MACADDR{address: {a, b, c, d, e, f}}}
+    end
   end
 
   @doc "Load from the native Ecto representation"
@@ -39,6 +36,23 @@ defmodule EctoNetwork.MACADDR do
     |> Enum.map(&Integer.to_string(&1, 16))
     |> Enum.map(&String.pad_leading(&1, 2, "0"))
     |> Enum.join(":")
+  end
+
+  defp parse_address(address) do
+    with split when length(split) == 6 <- String.split(address, ":"),
+         [_ | _] = parsed <- Enum.reduce_while(split, [], &parse_octet/2) do
+      Enum.reverse(parsed)
+    else
+      _ -> :error
+    end
+  end
+
+  defp parse_octet(octet, acc) do
+    with {int, ""} <- Integer.parse(octet, 16) do
+      {:cont, [int | acc]}
+    else
+      _ -> {:halt, :error}
+    end
   end
 end
 
