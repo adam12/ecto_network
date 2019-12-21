@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Parsing of invalid MAC Addresses will no longer raise ArgumentError #19 ([sneako](https://github.com/sneako))
+- Parsing of INET addresses without a netmask no longer raise ArgumentError (#20) ([mikl](https://github.com/mikl))
+
 ## v1.2.0
 
 - Ecto 3.2 support ([halostatue](https://github.com/halostatue))
