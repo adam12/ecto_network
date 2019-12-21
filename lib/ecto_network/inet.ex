@@ -27,21 +27,22 @@ defmodule EctoNetwork.INET do
         [address, netmask | _] -> {address, netmask}
       end
 
-    address
-    |> String.to_charlist()
-    |> :inet.parse_address()
-    |> case do
-      {:ok, address} ->
-        netmask =
-          if netmask do
-            String.to_integer(netmask)
-          else
-            address_netmask(address)
-          end
+    parsed_address =
+      address
+      |> String.trim()
+      |> String.to_charlist()
+      |> :inet.parse_address()
 
+    parsed_netmask = cast_netmask(netmask, parsed_address)
+
+    case [parsed_address, parsed_netmask] do
+      [_address_result, :error] ->
+        :error
+
+      [{:ok, address}, {netmask, ""}] ->
         {:ok, %Postgrex.INET{address: address, netmask: netmask}}
 
-      {:error, _} ->
+      _ ->
         :error
     end
   end
@@ -103,6 +104,20 @@ defmodule EctoNetwork.INET do
       true -> netmask
     end
   end
+
+  defp cast_netmask(mask, _address) when is_binary(mask) do
+    mask
+    |> String.trim()
+    |> Integer.parse()
+  end
+
+  # For addresses without a netmask, use the default (full) mask.
+  # Returns same structure as a successful Integer.parse()
+  defp cast_netmask(nil, {:ok, address}) do
+    {address_netmask(address), ""}
+  end
+
+  defp cast_netmask(_mask, _address), do: :error
 end
 
 defimpl String.Chars, for: Postgrex.INET do
