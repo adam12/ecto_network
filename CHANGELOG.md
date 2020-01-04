@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## v1.3.0
 
 - Parsing of invalid MAC Addresses will no longer raise ArgumentError #19 ([sneako](https://github.com/sneako))
 - Parsing of INET addresses without a netmask no longer raise ArgumentError (#20) ([mikl](https://github.com/mikl))
