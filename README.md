@@ -1,5 +1,11 @@
 # EctoNetwork
+
 [![Build Status](https://travis-ci.org/adam12/ecto_network.svg?branch=master)](https://travis-ci.org/adam12/ecto_network)
+[![Module Version](https://img.shields.io/hexpm/v/ecto_network.svg)](https://hex.pm/packages/ecto_network)
+[![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/ecto_network/)
+[![Total Download](https://img.shields.io/hexpm/dt/ecto_network.svg)](https://hex.pm/packages/ecto_network)
+[![License](https://img.shields.io/hexpm/l/ecto_network.svg)](https://github.com/adam12/ecto_network/blob/master/LICENSE)
+[![Last Updated](https://img.shields.io/github/last-commit/adam12/ecto_network.svg)](https://github.com/adam12/ecto_network/commits/master)
 
 Ecto types to support MACADDR and Network extensions provided by Postgrex.
 
@@ -8,11 +14,14 @@ due to the types it is providing.
 
 ## Installation
 
-1. Add `ecto_network` to your list of dependencies in `mix.exs`:
+1. Add `:ecto_network` to your list of dependencies in `mix.exs`:
 
     ```elixir
     def deps do
-      [{:ecto_network, "~> 1.3.0"}] # or 0.7.0 if you're stuck on Ecto < 3
+      [
+        # or 0.7.0 if you're stuck on Ecto < 3
+        {:ecto_network, "~> 1.3.0"}
+      ]
     end
     ```
 
@@ -47,7 +56,9 @@ That said, if your feature idea is nontrivial, you should probably open an issue
 [discuss it](http://www.igvita.com/2011/12/19/dont-push-your-pull-requests/)
 before attempting a pull request.
 
-## License
+## Copyright and License
 
-EctoNetwork is released under the MIT License. See [LICENSE](LICENSE.md) for
+Copyright (c) 2016 Adam Daniels and contributors
+
+EctoNetwork is released under the MIT License. See [LICENSE.md](./LICENSE.md) for
 more information.

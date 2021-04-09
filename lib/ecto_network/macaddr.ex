@@ -1,6 +1,6 @@
 defmodule EctoNetwork.MACADDR do
   @moduledoc ~S"""
-  Support for using Ecto with :macaddr fields
+  Support for using Ecto with `:macaddr` fields.
   """
 
   @behaviour Ecto.Type
@@ -13,7 +13,7 @@ defmodule EctoNetwork.MACADDR do
   @doc "Handle equality testing for CIDR records."
   def equal?(left, right), do: left == right
 
-  @doc "Handle casting to Postgrex.MACADDR"
+  @doc "Handle casting to Postgrex.MACADDR."
   def cast(%Postgrex.MACADDR{} = address), do: {:ok, address}
 
   def cast(address) when is_binary(address) do
@@ -22,15 +22,15 @@ defmodule EctoNetwork.MACADDR do
     end
   end
 
-  @doc "Load from the native Ecto representation"
+  @doc "Load from the native Ecto representation."
   def load(%Postgrex.MACADDR{} = address), do: {:ok, address}
   def load(_), do: :error
 
-  @doc "Convert to the native Ecto representation"
+  @doc "Convert to the native Ecto representation."
   def dump(%Postgrex.MACADDR{} = address), do: {:ok, address}
   def dump(_), do: :error
 
-  @doc "Convert from native Ecto representation to a binary"
+  @doc "Convert from native Ecto representation to a binary."
   def decode(%Postgrex.MACADDR{address: {a, b, c, d, e, f}}) do
     [a, b, c, d, e, f]
     |> Enum.map(&Integer.to_string(&1, 16))
