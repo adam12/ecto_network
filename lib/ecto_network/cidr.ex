@@ -1,6 +1,6 @@
 defmodule EctoNetwork.CIDR do
   @moduledoc ~S"""
-  Support for using Ecto with :cidr fields
+  Support for using Ecto with `:cidr` fields.
   """
 
   @behaviour Ecto.Type
