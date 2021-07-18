@@ -10,6 +10,13 @@ defmodule EctoNetwork.Mixfile do
       version: @version,
       elixir: "~> 1.4",
       name: "EctoNetwork",
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ],
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -27,6 +34,7 @@ defmodule EctoNetwork.Mixfile do
 
   defp deps do
     [
+      {:excoveralls, "~> 0.14.0", only: :test},
       {:ecto_sql, ">= 3.0.0"},
       {:postgrex, ">= 0.14.0"},
       {:phoenix_html, ">= 0.0.0", [optional: true]},
