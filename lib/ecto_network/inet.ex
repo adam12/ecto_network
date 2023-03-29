@@ -5,6 +5,8 @@ defmodule EctoNetwork.INET do
 
   @behaviour Ecto.Type
 
+  @type t :: Postgrex.INET.t()
+
   def type, do: :inet
 
   @doc "Handle embedding format for CIDR records."
