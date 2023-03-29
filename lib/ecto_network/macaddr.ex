@@ -5,6 +5,8 @@ defmodule EctoNetwork.MACADDR do
 
   @behaviour Ecto.Type
 
+  @type t :: Postgrex.MACADDR.t()
+
   def type, do: :macaddr
 
   @doc "Handle embedding format for CIDR records."
