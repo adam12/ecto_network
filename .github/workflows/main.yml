@@ -34,10 +34,10 @@ jobs:
   ecto32:
     runs-on: ubuntu-latest
     container:
-      image: elixir:1.9.1-slim
+      image: elixir:1.15.7-slim
     services:
       postgres:
-        image: postgres:10.8
+        image: postgres:14
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
