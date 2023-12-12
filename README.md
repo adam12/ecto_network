@@ -1,6 +1,5 @@
 # EctoNetwork
 
-[![Build Status](https://travis-ci.org/adam12/ecto_network.svg?branch=master)](https://travis-ci.org/adam12/ecto_network)
 [![Module Version](https://img.shields.io/hexpm/v/ecto_network.svg)](https://hex.pm/packages/ecto_network)
 [![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/ecto_network/)
 [![Total Download](https://img.shields.io/hexpm/dt/ecto_network.svg)](https://hex.pm/packages/ecto_network)
