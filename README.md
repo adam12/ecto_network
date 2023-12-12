@@ -20,7 +20,7 @@ due to the types it is providing.
     def deps do
       [
         # or 0.7.0 if you're stuck on Ecto < 3
-        {:ecto_network, "~> 1.3.0"}
+        {:ecto_network, "~> 1.4.0"}
       ]
     end
     ```
