@@ -65,6 +65,14 @@ defmodule EctoNetworkTest do
              {"is invalid", [type: EctoNetwork.INET, validation: :cast]}
   end
 
+  test "converts shortened address into changeset error" do
+    changeset = Device.changeset(%Device{}, %{ip_address: "111"})
+    {:error, changeset} = TestRepo.insert(changeset)
+
+    assert changeset.errors[:ip_address] ==
+             {"is invalid", [type: EctoNetwork.INET, validation: :cast]}
+  end
+
   test "converts ipv4 with incomplete CIDR into changeset error" do
     changeset = Device.changeset(%Device{}, %{ip_address: "1.2.3.0/"})
     {:error, changeset} = TestRepo.insert(changeset)
