@@ -33,7 +33,7 @@ defmodule EctoNetwork.INET do
       address
       |> String.trim()
       |> String.to_charlist()
-      |> :inet.parse_address()
+      |> :inet.parse_strict_address()
 
     parsed_netmask = cast_netmask(netmask, parsed_address)
 
