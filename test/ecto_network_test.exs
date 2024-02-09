@@ -38,7 +38,7 @@ defmodule EctoNetworkTest do
 
   test "returns changeset error when mac address is invalid" do
     changeset = Device.changeset(%Device{}, %{macaddr: "notamac"})
-    assert {:error, invalid_changeset} = TestRepo.insert(changeset)
+    assert {:error, _invalid_changeset} = TestRepo.insert(changeset)
 
     assert changeset.errors[:macaddr] ==
              {"is invalid", [type: EctoNetwork.MACADDR, validation: :cast]}
