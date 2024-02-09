@@ -5,11 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## v1.5.0 - 2024-02-09
+
+- Misc deprecation cleanups ([adam12](https://github.com/adam12))
+- Parse addresses in strict mode ([aerosol](https://github.com/aerosol))
+
+
 ## v1.4.0 - 2023-12-12
 
 - Misc doc changes ([kianmeng](https://github.com/kianmeng))
 - Add excoveralls for test coverage reporting ([sbothma](https://github.com/sbothma))
 - Add @type annotations ([s3cur3](https://github.com/s3cur3))
+
 
 ## v1.3.0 - 2020-01-04
 
