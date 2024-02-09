@@ -2,7 +2,7 @@ defmodule EctoNetwork.Mixfile do
   use Mix.Project
 
   @source_url "https://github.com/adam12/ecto_network"
-  @version "1.4.0"
+  @version "1.5.0"
 
   def project do
     [
