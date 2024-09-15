@@ -1,0 +1,6 @@
+[env]
+DATABASE_URL = "postgres://postgres:secret@localhost/ecto_network_test"
+
+[tools]
+erlang = "latest"
+elixir = "latest"

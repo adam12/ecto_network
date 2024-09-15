@@ -1,0 +1,16 @@
+---
+version: "3"
+name: ecto_network
+
+services:
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - "pg_data:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+
+volumes:
+  pg_data:
