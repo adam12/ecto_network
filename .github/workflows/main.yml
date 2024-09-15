@@ -3,35 +3,7 @@ name: CI
 on: [push]
 
 jobs:
-  ecto30:
-    runs-on: ubuntu-latest
-    container:
-      image: elixir:1.9.1-slim
-    services:
-      postgres:
-        image: postgres:10.8
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: ecto_network_test
-        ports:
-          - 5432:5432
-    steps:
-      - uses: actions/checkout@v1
-      - name: Install dependencies
-        env:
-          LOCKFILE: mix.lock.ecto30
-        run: |
-          mix local.rebar --force
-          mix local.hex --force
-          mix deps.get
-      - name: Run all tests
-        env:
-          LOCKFILE: mix.lock.ecto30
-          DATABASE_URL: "ecto://postgres:postgres@postgres/ecto_network_test"
-        run: mix test
-
-  ecto32:
+  test:
     strategy:
       matrix:
         elixir_version: [1.17, 1.16, 1.15, 1.14, 1.13]
