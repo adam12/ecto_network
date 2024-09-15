@@ -8,7 +8,7 @@ defmodule EctoNetwork.Mixfile do
     [
       app: :ecto_network,
       version: @version,
-      elixir: "~> 1.4",
+      elixir: "~> 1.9",
       name: "EctoNetwork",
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: [
