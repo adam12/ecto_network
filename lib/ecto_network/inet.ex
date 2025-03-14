@@ -57,7 +57,6 @@ defmodule EctoNetwork.INET do
       cond do
         address_netmask(inet.address, inet.netmask) -> inet
         address_netmask(inet.address) -> %{inet | netmask: address_netmask(inet.address)}
-        true -> %{inet | netmask: nil}
       end
 
     {:ok, inet}
