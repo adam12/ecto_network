@@ -99,6 +99,14 @@ defmodule EctoNetworkTest do
     assert "#{device.ip_address}" == "127.0.0.1"
   end
 
+  test "rejects an IPv4 tuple with out-of-range values" do
+    changeset = Device.changeset(%Device{}, %{ip_address: {300, 300, 300, 300}})
+    {:error, changeset} = TestRepo.insert(changeset)
+
+    assert changeset.errors[:ip_address] ==
+             {"is invalid", [type: EctoNetwork.INET, validation: :cast]}
+  end
+
   test "accepts ipv6 address as tuple and saves" do
     ip_address = {8193, 3512, 0, 0, 0, 65280, 66, 33577}
     short_ip_address = "2001:db8::ff00:42:8329"
@@ -107,6 +115,23 @@ defmodule EctoNetworkTest do
     device = TestRepo.get(Device, device.id)
 
     assert String.downcase("#{device.ip_address}") == String.downcase(short_ip_address)
+  end
+
+  test "rejects an IPv6 tuple with out-of-range values" do
+    ip_address = {65536, 0, 0, 0, 0, 0, 0, 0}
+    changeset = Device.changeset(%Device{}, %{ip_address: ip_address})
+    {:error, changeset} = TestRepo.insert(changeset)
+
+    assert changeset.errors[:ip_address] ==
+             {"is invalid", [type: EctoNetwork.INET, validation: :cast]}
+  end
+
+  test "rejects tuples with incorrect size" do
+    changeset = Device.changeset(%Device{}, %{ip_address: {1, 2, 3}})
+    {:error, changeset} = TestRepo.insert(changeset)
+
+    assert changeset.errors[:ip_address] ==
+             {"is invalid", [type: EctoNetwork.INET, validation: :cast]}
   end
 
   test "accepts cidr address as binary and saves" do
