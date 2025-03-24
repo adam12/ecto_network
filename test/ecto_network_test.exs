@@ -99,6 +99,22 @@ defmodule EctoNetworkTest do
     assert "#{device.ip_address}" == "127.0.0.1"
   end
 
+  test "accepts smallest ipv4 address as tuple and saves" do
+    changeset = Device.changeset(%Device{}, %{ip_address: {0, 0, 0, 0}})
+    device = TestRepo.insert!(changeset)
+    device = TestRepo.get(Device, device.id)
+
+    assert "#{device.ip_address}" == "0.0.0.0"
+  end
+
+  test "accepts largest ipv4 address as tuple and saves" do
+    changeset = Device.changeset(%Device{}, %{ip_address: {255, 255, 255, 255}})
+    device = TestRepo.insert!(changeset)
+    device = TestRepo.get(Device, device.id)
+
+    assert "#{device.ip_address}" == "255.255.255.255"
+  end
+
   test "rejects an IPv4 tuple with out-of-range values" do
     changeset = Device.changeset(%Device{}, %{ip_address: {300, 300, 300, 300}})
     {:error, changeset} = TestRepo.insert(changeset)
