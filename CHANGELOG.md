@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## unreleased
+
+- Remove redundant case from typechecker warning ([hchienjo](https://github.com/hchienjo))
+- Validate IP address when casting tuple ([zaratedev](https://github.com/zaratedev))
+- No longer testing for Ecto 3.0 ([adam12](https://github.com/adam12))
+- Minimum version for Elixir now 1.9 ([adam12](https://github.com/adam12))
+
 ## v1.5.0 - 2024-02-09
 
 - Misc deprecation cleanups ([adam12](https://github.com/adam12))
