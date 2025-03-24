@@ -18,8 +18,13 @@ defmodule EctoNetwork.INET do
   @doc "Handle casting to Postgrex.INET."
   def cast(%Postgrex.INET{} = address), do: {:ok, address}
 
-  def cast(address) when is_tuple(address),
-    do: cast(%Postgrex.INET{address: address, netmask: address_netmask(address)})
+  def cast(address) when is_tuple(address) do
+    if valid_ip_address?(address) do
+      cast(%Postgrex.INET{address: address, netmask: address_netmask(address)})
+    else
+      :error
+    end
+  end
 
   def cast(address) when is_binary(address) do
     {address, netmask} =
@@ -119,6 +124,16 @@ defmodule EctoNetwork.INET do
   end
 
   defp cast_netmask(_mask, _address), do: :error
+
+  defp valid_ip_address?(ip_address) when is_tuple(ip_address) do
+    case tuple_size(ip_address) do
+      4 -> Enum.all?(Tuple.to_list(ip_address), &(is_integer(&1) and &1 >= 0 and &1 < 256))
+      8 -> Enum.all?(Tuple.to_list(ip_address), &(is_integer(&1) and &1 >= 0 and &1 < 65536))
+      _ -> false
+    end
+  end
+
+  defp valid_ip_address?(_), do: false
 end
 
 defimpl String.Chars, for: Postgrex.INET do
