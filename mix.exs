@@ -62,7 +62,7 @@ defmodule EctoNetwork.Mixfile do
     [
       extras: [
         "CHANGELOG.md",
-        {:"LICENSE.md", title: ["License"]},
+        {:"LICENSE.md", title: "License"},
         "README.md"
       ],
       main: "readme",
