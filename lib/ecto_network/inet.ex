@@ -132,8 +132,6 @@ defmodule EctoNetwork.INET do
       _ -> false
     end
   end
-
-  defp valid_ip_address?(_), do: false
 end
 
 defimpl String.Chars, for: Postgrex.INET do
