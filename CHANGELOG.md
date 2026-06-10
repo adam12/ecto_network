@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## unreleased
 
+
+## v1.6.1 - 2026-06-09
+
 - Remove unreachable function clause flagged by Elixir 1.20 ([adam12](https://github.com/adam12))
 - No longer testing against end-of-life Elixir versions ([adam12](https://github.com/adam12))
 

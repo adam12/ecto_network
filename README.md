@@ -18,7 +18,7 @@ due to the types it is providing.
     ```elixir
     def deps do
       [
-        {:ecto_network, "~> 1.6.0"}
+        {:ecto_network, "~> 1.6.1"}
       ]
     end
     ```
